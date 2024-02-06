@@ -1,0 +1,22 @@
+<table class="table">
+	<tbody id="myTbodyID">
+		{% for item in itemArray %}
+			<tr id="{{ item.itemID }}" data-bs-target="#EditItemModal" data-bs-toggle="modal">
+				<td>{{ item.itemDescr }}</td>
+				<td>{{ item.itemSartDate }}</td>
+				<td>{{ item.itemEndDate }}</td>
+				<td colspan="2">
+					{% if item.itemComp == True %}
+						<span style="color: rgb(68, 184, 68);">Completed</span>
+					{% endif %}
+					{% if item.itemComp == False and item.itemEndDate < current_date.date() %}
+						<span style="color: rgb(156, 48, 48);">Outstanding</span>
+					{% endif %}
+					{% if item.itemComp == False and item.itemEndDate >= current_date.date() %}
+						<span style="color: rgb(57, 99, 146);">Pending</span>
+					{% endif %}
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>

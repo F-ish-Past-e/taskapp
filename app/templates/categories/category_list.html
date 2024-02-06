@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+	<div class="container-fluid">
+		<div class="card bg-primary pt-3">
+			<table class="table table-hover table-sm">
+				<thead>
+					<div style="width: 90%;">
+						<th>Category Description</th>
+					</div>
+					<th style="width: 10%;">
+						<a href="{{ url_for('categories.category_add') }}" class="btn btn-sm btn-outline-primary" style="width: 100%;">Add Category</a>
+					</th>
+				</thead>
+				<tbody id="myTbodyID">
+					{% for cat in cat_list %}
+						<tr id="{{ cat.cat_id }}">
+							<td colspan="2">{{ cat.cat_descr }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+<script>
+	$('#myTbodyID tr').click(function(){
+		clickedCatEditRow = $(this).attr('id')
+		window.location.href = `/category_edit/${clickedCatEditRow}`;
+	})
+</script>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+<form id="itemEditForm">
+	<input type="hidden" name="hidden_item_id" id="hidden_item_id" value="{{ hidden_item_id }}">
+	{{ item_edit_form.hidden_tag() }}
+	<div class="input-group input-group-sm p-1">
+		<span class="input-group-text">Item Description</span>
+		{{ item_edit_form.edit_item_descr(class='form-control form-control-sm') }}
+	</div>
+	<div class="input-group input-group-sm p-1">
+		<span class="input-group-text">Start Date</span>
+		{{ item_edit_form.edit_item_start_date(class='form-control form-control-sm') }}
+		<span class="input-group-text">End Date</span>
+		{{ item_edit_form.edit_item_end_date(class='form-control form-control-sm') }}
+	</div>
+	<div class="input-group input-group-sm p-1">
+		<span class="input-group-text">Completed</span>
+		<div class="input-group-text">
+			{{ item_edit_form.edit_item_completed(class='form-check-input') }}
+		</div>
+	</div>
+	<div class="input-group input-group-sm p-1">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4"></div>
+				<div class="col-sm-4">
+					{{ item_edit_form.edit_item_submit(class="btn btn-sm btn-outline-primary", style="width: 100%;") }}
+				</div>
+				<div class="col-sm-4"></div>
+			</div>	
+		</div>
+	</div>
+</form>
+<script src="../../static/jsCode/items.js"></script>

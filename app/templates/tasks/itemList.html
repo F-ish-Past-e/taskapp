@@ -1,0 +1,62 @@
+<h3>Item List</h3>
+<div class="card bg-primary pt-3">
+	<input type="hidden" name="hiddenTaskID" id="hiddenTaskID" value="{{ clicked_task_row }}">
+	<table class="table table-hover table-sm">
+		<thead>
+			<div style="width: 90%;">
+				<th>Item Description</th>
+				<th>Start Date</th>
+				<th>End Date</th>
+				<th>
+					<select name="itemStatus" id="itemStatus" class="form-select form-select-sm">
+						<option value="pending">Pending</option>
+						<option value="outstanding">Outstanding</option>
+						<option value="completed">Completed</option>
+						<option value="all">All</option>
+					</select>
+				</th>
+			</div>
+			<th style="width: 10%;">
+				<a class="btn btn-sm btn-outline-primary" id="add_item_but" data-bs-target="#AddItemModal" data-bs-toggle="modal" style="width: 100%;">Add Items</a>
+			</th>
+		</thead>
+		<tbody id="myTbodyID">
+			{% for item in itemArray %}
+				<tr id="{{ item.itemID }}" data-bs-target="#EditItemModal" data-bs-toggle="modal">
+					<td>{{ item.itemDescr }}</td>
+					<td>{{ item.itemSartDate }}</td>
+					<td>{{ item.itemEndDate }}</td>
+					<td colspan="2">
+						<span style="color: rgb(57, 99, 146);">Pending</span>
+					</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+
+<div class="modal fade" id="AddItemModal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="v_add">Add Item</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="itemAddContentDiv"></div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="EditItemModal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="v_add">Edit Item</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="itemEditContentDiv"></div>
+		</div>
+	</div>
+</div>
+
+<script src="../../static/jsCode/items.js"></script>

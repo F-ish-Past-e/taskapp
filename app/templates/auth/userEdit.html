@@ -1,0 +1,17 @@
+<form action="{{ url_for('auth.userEdit') }}" method="post">
+	{{ user_edit_form.hidden_tag() }}
+	<div class="input-group input-group-sm p-1">
+		<span class="input-group-text text-primary">Username:</span>
+		{{ user_edit_form.username(class='form-control form-control-sm text-primary') }}
+	</div>
+	<div class="input-group input-group-sm p-1">
+		{{ user_edit_form.submit(class="btn btn-sm btn-outline-primary", style="width: 100%;", value="Update") }}
+	</div>
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for message in messages %}
+				<span class="input-group-text bg-danger">{{ message }}</span>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+</form>

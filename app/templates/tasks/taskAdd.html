@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+	<div class="card" style="width: 500px; margin: 0px auto;">
+		<div class="container p-1">
+			<form action="{{ url_for('tasks.taskAdd') }}" method="post">
+				{{ task_add_form.hidden_tag() }}
+				<h4>Add Task</h4>
+				<div class="input-group input-group-sm p-1">
+					<span class="input-group-text">Task Description</span>
+					{{ task_add_form.add_task_descr(class="form-control form-control-sm", cols="30", rows="10") }}
+				</div>
+				<div class="input-group input-group-sm p-1">
+					<span class="input-group-text">Start Date</span>
+					{{ task_add_form.add_task_start_date(class="form-control form-control-sm") }}
+				</div>
+				<div class="input-group input-group-sm p-1">
+					<span class="input-group-text">End Date</span>
+					{{ task_add_form.add_task_end_date(class="form-control form-control-sm") }}
+				</div>
+				<div class="input-group input-group-sm p-1">
+					<span class="input-group-text">Category</span>
+					{{ task_add_form.add_task_category(class="form-select form-select-sm") }}
+				</div>
+				<div class="p-1">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-sm-6">
+								<a class="btn btn-sm btn-outline-secondary" href="{{ url_for('tasks.tasksList') }}" style="width: 100%;">Back</a>
+							</div>
+							<div class="col-sm-6">
+								<button type="submit" class="btn btn-sm btn-outline-primary" style="width: 100%;">Save</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+{% endblock %}

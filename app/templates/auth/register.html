@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+	<div class="containter">
+		<div class="row justify-content-center align-items-center" style="height: 70vh;">
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4">
+				<div class="card bg-primary-subtle">
+					<div class="p-1">
+						<h5 class="text-primary">Register Form</h5>
+					</div>
+					<form action="{{ url_for('auth.register') }}" method="post">
+						{{ register_form.hidden_tag() }}
+						<div class="input-group input-group-sm p-1">
+							<span class="input-group-text text-primary">Username:</span>
+							{{ register_form.username(class='form-control form-control-sm text-primary') }}
+						</div>
+						<div class="input-group input-group-sm p-1">
+							<span class="input-group-text text-primary">Password:</span>
+							{{ register_form.password(class='form-control form-control-sm text-primary') }}
+						</div>
+						<div class="input-group input-group-sm p-1">
+							<span class="input-group-text text-primary">Confirm Password:</span>
+							{{ register_form.confirm_password(class='form-control form-control-sm text-primary') }}
+							</div>
+						<div class="input-group input-group-sm p-1">
+							<a class="btn btn-sm btn-outline-secondary" href="{{ url_for('auth.login') }}" style="width: 50%;">Back</a>
+							<button type="submit" class="btn btn-sm btn-outline-primary" style="width: 50%;">Register</button>
+						</div>
+						{% with messages = get_flashed_messages() %}
+							{% if messages %}
+								{% for message in messages %}
+									<span class="input-group-text bg-danger">{{ message }}</span>
+								{% endfor %}
+							{% endif %}
+						{% endwith %}
+					</form>
+				</div>
+			</div>
+			<div class="col-sm-4"></div>
+		</div>
+	</div>
+{% endblock %}

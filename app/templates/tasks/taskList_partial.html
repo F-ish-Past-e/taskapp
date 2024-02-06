@@ -1,0 +1,23 @@
+<table class="table">
+	<tbody id="myTbodyID">
+		{% for task in task_list %}
+		<tr id="{{ task.taskID }}">
+			<td>{{ task.taskDescr }}</td>
+			<td>{{ task.taskStartdate }}</td>
+			<td>{{ task.taskEnddate }}</td>
+			<td>{{ task.taskCategory }}</td>
+			<td colspan="2">
+				{% if task.taskCompleted == True %}
+					<span style="color: rgb(68, 184, 68);">Completed</span>
+				{% endif %}
+				{% if task.taskCompleted == False and task.taskEnddate >= current_date.date() %}
+					<span style="color: rgb(57, 99, 146);">Pending</span>
+				{% endif %}
+				{% if task.taskCompleted == False and task.taskEnddate < current_date.date() %}
+					<span style="color: rgb(156, 48, 48);">Outstanding</span>
+				{% endif %}
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>

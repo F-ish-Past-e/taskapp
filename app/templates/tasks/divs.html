@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+	<input type="hidden" name="hiddenTaskID" id="hiddenTaskID" value="{{ clickedTaskRow }}">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="divs_content_one"></div>
+			</div>
+			<div class="col-sm-8">
+				<div class="divs_content_two"></div>
+			</div>
+		</div>
+	</div>
+<script src="../../static/jsCode/divs.js"></script>
+{% endblock %}

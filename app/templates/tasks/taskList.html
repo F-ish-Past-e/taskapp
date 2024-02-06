@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+	<div class="container-fluid">
+		<div class="card bg-primary pt-3">
+			<table class="table table-hover table-sm">
+				<thead>
+					<div style="width: 90%;">
+						<th>Task Description</th>
+						<th>Start Date</th>
+						<th>End Date</th>
+						<th>Category</th>
+						<th>
+							<select style="width: fit-content;" id="filterStatus" class="form-select form-select-sm">
+								<option value="pending">Pending</option>
+								<option value="outstanding">Outstanding</option>
+								<option value="completed">Completed</option>
+								<option value="">All</option>
+							</select>
+						</th>
+					</div>
+					<th style="width: 10%;">
+						<a href="{{ url_for('tasks.taskAdd') }}" class="btn btn-sm btn-outline-primary" style="width: 100%;">Add Task</a>
+					</th>
+				</thead>
+				<tbody id="myTbodyID">
+					{% for task in task_list %}
+					<tr id="{{ task.taskID }}">
+						<td>{{ task.taskDescr }}</td>
+						<td>{{ task.taskStartdate }}</td>
+						<td>{{ task.taskEnddate }}</td>
+						<td>{{ task.taskCategory }}</td>
+						<td colspan="2">
+							{% if task.taskCompleted == True %}
+								<span style="color: rgb(68, 184, 68);">Completed</span>
+							{% endif %}
+							{% if task.taskCompleted == False and task.taskEnddate < current_date.date() %}
+								<span style="color: rgb(156, 48, 48);">Outstanding</span>
+							{% endif %}
+							{% if task.taskCompleted == False and task.taskEnddate >= current_date.date() %}
+								<span style="color: rgb(57, 99, 146);">Pending</span>
+							{% endif %}
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+<script>
+	$('#filterStatus').change(function(){
+		var clickedStatus = $(this).val();
+		$.post('/tasksList', { clickedStatus: clickedStatus }, function(data) {
+			$('#myTbodyID').html(data);
+		});
+	});
+	$(document).on('click', '#myTbodyID tr', function(){
+		clickedTaskRow = $(this).attr('id')
+		window.location.href = `/divsPage/${clickedTaskRow}`;
+	})
+</script>
+{% endblock %}

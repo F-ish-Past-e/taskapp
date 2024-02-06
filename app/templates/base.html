@@ -1,0 +1,96 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../../static/bootstrap-5.3.2-dist/css/bootstrap.min.css">
+    <script src="../../static/bootstrap-5.3.2-dist/js/bootstrap.min.js"></script>
+	<script src="../static/jquery.js"></script>
+	<title>Task Base HTML</title>
+</head>
+<style>
+.dropdown {
+	position: relative; /* Ensure the dropdown content is positioned relative to this container */
+	display: inline-block; /* Keep the dropdown elements together */
+}
+
+.dropdown-content {
+	display: none; /* Hide the dropdown content initially */
+	position: absolute; /* Position it relative to the button */
+	background-color: #f1f1f1;
+	min-width: 160px; /* Set a minimum width */
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Add a shadow for visual appeal */
+	border-radius: 3px;
+	z-index: 1; /* Ensure it appears above other elements */
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown-content a:hover {
+	background-color: #ddd;
+}
+</style>
+<body>
+	<div class="container">
+
+		{% if current_user.is_authenticated %}
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6">
+					<nav class="nav">
+						<a class="nav-link" href="{{ url_for('tasks.tasksList') }}">Task List</a>
+						<a class="nav-link" href="{{ url_for('categories.category_list') }}">Categories</a>
+					</nav>	
+				</div>
+				<div class="col-sm-6">
+					<nav class="nav float-end">
+						<div class="dropdown">
+							<a class="nav-link dropdown-button">Settings</a>
+							<div class="dropdown-content">
+								<a class="EditUserClick" data-bs-target="#EditUserModal" data-bs-toggle="modal">User</a>
+							</div>
+						</div>
+						<a class="nav-link" href="{{ url_for('auth.logout') }}">Log-out</a>
+					</nav>	
+				</div>	
+			</div>
+		</div>
+
+	</div>
+
+	<div class="modal fade" id="EditUserModal">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="v_add">Edit User</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="userEditConetentDiv"></div>
+			</div>
+		</div>
+	</div>
+
+	{% endif %}
+	{% block content %}{% endblock %}
+</body>
+<script>
+
+	$(document).ready(function(){
+		$(".dropdown-button").click(function(){
+			$(this).next(".dropdown-content").toggle('fast');
+		});
+	});
+
+	$('.EditUserClick').click(function(){
+		$.post('userEdit', function(UserEditReturnData){
+			$('.userEditConetentDiv').html(UserEditReturnData)
+		})
+	})
+
+</script>
+<script src="../static/jsCode/test.js"></script>
+</html>
