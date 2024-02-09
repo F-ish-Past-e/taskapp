@@ -85,8 +85,8 @@
 		});
 	});
 
-	$('.EditUserClick').click(function(){
-		$.post('userEdit', function(UserEditReturnData){
+	$(document).on('click', '.EditUserClick', function(){
+		$.post('/userEdit', function(UserEditReturnData){
 			$('.userEditConetentDiv').html(UserEditReturnData)
 		})
 	})
