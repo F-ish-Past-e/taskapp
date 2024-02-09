@@ -3,6 +3,7 @@ from app.blueprints.items import items
 from app.blueprints.items.form import itemAddForm, itemEditForm
 from app.blueprints.items.model import Items
 from datetime import datetime
+from flask_login import current_user
 from app import db
 
 @items.route('/item_list', methods=['POST', ])
@@ -52,6 +53,7 @@ def item_add():
 	if item_add_form.validate_on_submit():
 		item_add_stmt = Items(
 			task_id=request.form.get('hiddenTaskID'),
+			item_logged=current_user.id,
 			item_descr=item_add_form.add_item_descr.data,
 			item_start_date=item_add_form.add_item_start_date.data,
 			item_end_date=item_add_form.add_item_end_date.data,
