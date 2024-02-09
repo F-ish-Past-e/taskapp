@@ -3,7 +3,7 @@ from app.blueprints.tasks import tasks
 from app.blueprints.tasks.model import Task
 from app.blueprints.categories.model import Categories
 from app.blueprints.tasks.form import taskAddForm, taskEditForm
-from flask_login import login_required
+from flask_login import login_required, current_user
 from datetime import datetime
 from app import db
 
@@ -14,13 +14,13 @@ def tasksList():
 	if request.method == 'POST':
 		clickedStatus = request.form['clickedStatus']
 		if clickedStatus == 'completed':
-			taskListSTMT = Task.query.filter(Task.task_completed == True).all()
+			taskListSTMT = Task.query.filter(Task.task_logged==current_user.id, Task.task_completed == True).all()
 		elif clickedStatus == 'pending':
-			taskListSTMT = Task.query.filter(Task.task_end_date >= current_date.date(), Task.task_completed == False).all()
+			taskListSTMT = Task.query.filter(Task.task_logged==current_user.id, Task.task_end_date >= current_date.date(), Task.task_completed == False).all()
 		elif clickedStatus == 'outstanding':
-			taskListSTMT = Task.query.filter(Task.task_end_date < current_date.date(), Task.task_completed == False).all()
+			taskListSTMT = Task.query.filter(Task.task_logged==current_user.id, Task.task_end_date < current_date.date(), Task.task_completed == False).all()
 		else:
-			taskListSTMT = Task.query.all()
+			taskListSTMT = Task.query.filter(Task.task_logged==current_user.id)
 
 		task_list_array = []
 		for t_list in taskListSTMT:
@@ -36,7 +36,7 @@ def tasksList():
 
 		return render_template('tasks/taskList_partial.html', task_list=task_list_array, current_date=current_date)
 
-	taskListSTMT = Task.query.filter(Task.task_end_date >= current_date.date(), Task.task_completed == False).all()
+	taskListSTMT = Task.query.filter(Task.task_logged==current_user.id, Task.task_end_date >= current_date.date(), Task.task_completed == False).all()
 	task_list_array = []
 	for t_list in taskListSTMT:
 		task_data = {
@@ -62,6 +62,7 @@ def taskAdd():
 			task_end_date = task_add_form.add_task_end_date.data
 
 			task_add_query = Task(
+				task_logged = current_user.id,
 				task_descr=task_description,
 				task_start_date=task_start_date,
 				task_end_date=task_end_date,
@@ -127,6 +128,6 @@ def divsPage(clickedTaskRow):
 
 
 
-@tasks.route('/testing', methods=['POST'])
+@tasks.route('/testing', methods=['POST', 'GET'])
 def testing():
-	return 'shaun'
+	return str(current_user.id)

@@ -4,6 +4,7 @@ from app.blueprints.categories.model import Categories
 
 class Task(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
+	task_logged = db.Column(db.Integer)
 	category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
 	category = db.relationship('Categories', backref='tasks')
 	task_descr = db.Column(db.String(500), nullable=False)
