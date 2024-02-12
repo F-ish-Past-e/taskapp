@@ -1,0 +1,25 @@
+	<div class="container-fluid">
+		<div class="card bg-primary pt-3">
+			<table class="table table-hover table-sm">
+				<thead>
+					<div style="width: 100%;">
+						<th>Category Description</th>
+					</div>
+				</thead>
+				<tbody id="catTbodyID">
+					{% for cat in cat_list %}
+						<tr id="{{ cat.cat_id }}">
+							<td colspan="2">{{ cat.cat_descr }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<div class="row pt-2">
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4">
+				<button class="btn btn-sm btn-outline-primary" id="task_category_add_button" style="width: 100%;">Add Category</button>
+			</div>
+			<div class="col-sm-4"></div>
+		</div>
+	</div>

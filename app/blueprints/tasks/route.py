@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, jsonify
 from app.blueprints.tasks import tasks
 from app.blueprints.tasks.model import Task
-from app.blueprints.categories.model import Categories
+from app.blueprints.task_categories.model import Categories
 from app.blueprints.tasks.form import taskAddForm, taskEditForm
 from flask_login import login_required, current_user
 from datetime import datetime

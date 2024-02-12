@@ -1,6 +1,6 @@
 from app import db
 from datetime import datetime
-from app.blueprints.categories.model import Categories
+from app.blueprints.task_categories.model import Categories
 
 class Task(db.Model):
 	id = db.Column(db.Integer, primary_key=True)

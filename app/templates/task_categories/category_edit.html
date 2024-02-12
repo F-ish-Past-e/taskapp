@@ -1,0 +1,24 @@
+<div class="card">
+	<div class="container p-1">
+		<form id="taskCatEditForm">
+			{{ cat_edit_form.hidden_tag() }}
+			<input type="hidden" name="clickedCatEditRow" id="clickedCatEditRow" value="{{ clickedCatEditRow }}">
+			<div class="input-group input-group-sm p-1">
+				<span class="input-group-text">Category Description</span>
+				{{ cat_edit_form.edit_cat_descr(class="form-control form-control-sm") }}
+			</div>
+			<div class="p-1">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-sm-6">
+							<a class="btn btn-sm btn-outline-secondary" data-bs-target="#category_modal_list" data-bs-toggle="modal" style="width: 100%;">Back</a>
+						</div>
+						<div class="col-sm-6">
+							<button type="submit" class="btn btn-sm btn-outline-primary" style="width: 100%;">Save</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
