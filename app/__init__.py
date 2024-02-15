@@ -22,6 +22,9 @@ app.register_blueprint(task_categories_bp)
 from app.blueprints.items import items as items_bp
 app.register_blueprint(items_bp)
 
+from app.blueprints.priority import priority as priority_bp
+app.register_blueprint(priority_bp)
+
 def create_app():
 
 	@app.route('/')

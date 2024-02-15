@@ -2,13 +2,13 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, DateField, TextAreaField, IntegerField, SelectField, SubmitField
 from wtforms.validators import DataRequired
 
-class itemAddForm(FlaskForm):
+class ItemAddForm(FlaskForm):
 	add_item_descr = StringField(validators=[DataRequired()])
 	add_item_start_date = DateField(validators=[DataRequired()])
 	add_item_end_date = DateField(validators=[DataRequired()])
 	add_item_submit = SubmitField('Commit')
 
-class itemEditForm(FlaskForm):
+class ItemEditForm(FlaskForm):
 	edit_item_descr = StringField(validators=[DataRequired()])
 	edit_item_start_date = DateField(validators=[DataRequired()])
 	edit_item_end_date = DateField(validators=[DataRequired()])

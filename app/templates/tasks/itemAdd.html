@@ -1,26 +1,39 @@
-<form id="itemAddForm">
-	<input type="hidden" name="hiddenTaskID" id="hiddenTaskID" value="{{ hiddenTaskID }}">
-	{{ item_add_form.hidden_tag() }}
-	<div class="input-group input-group-sm p-1">
-		<span class="input-group-text">Item Description</span>
-		{{ item_add_form.add_item_descr(class='form-control form-control-sm') }}
-	</div>
-	<div class="input-group input-group-sm p-1">
-		<span class="input-group-text">Start Date</span>
-		{{ item_add_form.add_item_start_date(class='form-control form-control-sm') }}
-		<span class="input-group-text">End Date</span>
-		{{ item_add_form.add_item_end_date(class='form-control form-control-sm') }}
-	</div>
-	<div class="input-group input-group-sm p-1">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-4"></div>
-				<div class="col-sm-4">
-					{{ item_add_form.add_item_submit(class="btn btn-sm btn-outline-primary", style="width: 100%;") }}
-				</div>
-				<div class="col-sm-4"></div>
-			</div>	
+<div class="modal fade" id="AddItemModal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="v_add">Add Item</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form id="itemAddForm">
+					<input type="hidden" name="hiddenTaskID" id="hiddenTaskID" value="{{ hiddenTaskID }}">
+					{{ item_add_form.hidden_tag() }}
+					<div class="input-group input-group-sm p-1">
+						<span class="input-group-text">Item Description</span>
+						{{ item_add_form.add_item_descr(class='form-control form-control-sm') }}
+					</div>
+					<div class="input-group input-group-sm p-1">
+						<span class="input-group-text">Start Date</span>
+						{{ item_add_form.add_item_start_date(class='form-control form-control-sm') }}
+						<span class="input-group-text">End Date</span>
+						{{ item_add_form.add_item_end_date(class='form-control form-control-sm') }}
+					</div>
+					<div class="input-group input-group-sm p-1">
+						<div class="container">
+							<div class="row">
+								<div class="col-sm-4"></div>
+								<div class="col-sm-4">
+									{{ item_add_form.add_item_submit(class="btn btn-sm btn-outline-primary", style="width: 100%;") }}
+								</div>
+								<div class="col-sm-4"></div>
+							</div>	
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
-</form>
+</div>
+
 <script src="../../static/jsCode/items.js"></script>

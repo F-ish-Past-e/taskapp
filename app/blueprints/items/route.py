@@ -1,6 +1,6 @@
 from flask import render_template, redirect, request, url_for, flash
 from app.blueprints.items import items
-from app.blueprints.items.form import itemAddForm, itemEditForm
+from app.blueprints.items.form import ItemAddForm, ItemEditForm
 from app.blueprints.items.model import Items
 from datetime import datetime
 from flask_login import current_user
@@ -49,7 +49,7 @@ def item_list():
 
 @items.route('/item_add', methods=['POST', 'GET'])
 def item_add():
-	item_add_form = itemAddForm()
+	item_add_form = ItemAddForm()
 	if item_add_form.validate_on_submit():
 		item_add_stmt = Items(
 			task_id=request.form.get('hiddenTaskID'),
@@ -66,7 +66,7 @@ def item_add():
 
 @items.route('/item_edit', methods=['POST', 'GET'])
 def item_edit():
-	item_edit_form = itemEditForm()
+	item_edit_form = ItemEditForm()
 	if 'clickItemRow' in request.form:
 		item_edit_stmt = Items.query.get(request.form.get('clickItemRow'))
 		hidden_item_id = item_edit_stmt.id

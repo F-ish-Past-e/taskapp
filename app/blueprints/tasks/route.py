@@ -2,7 +2,7 @@ from flask import render_template, request, redirect, jsonify
 from app.blueprints.tasks import tasks
 from app.blueprints.tasks.model import Task
 from app.blueprints.task_categories.model import Categories
-from app.blueprints.tasks.form import taskAddForm, taskEditForm
+from app.blueprints.tasks.form import TaskAddForm, TaskEditForm
 from flask_login import login_required, current_user
 from datetime import datetime
 from app import db
@@ -53,7 +53,7 @@ def tasksList():
 @tasks.route('/taskAdd', methods=['GET', 'POST'])
 @login_required
 def taskAdd():
-	task_add_form = taskAddForm()
+	task_add_form = TaskAddForm()
 	if request.method == 'POST':
 		if task_add_form.validate_on_submit:
 
@@ -75,7 +75,7 @@ def taskAdd():
 		taskListSTMT = Task.query.all()
 		return redirect('/tasksList')
 
-	cat_stmt = Categories.query.all()
+	cat_stmt = Categories.query.filter(Categories.cat_logged==current_user.id).all()
 	choices = [(cat.id, cat.cat_descr) for cat in cat_stmt]
 	task_add_form.add_task_category.choices = choices
 
@@ -85,10 +85,10 @@ def taskAdd():
 @tasks.route('/taskEdit/', methods=['GET', 'POST'])
 def taskEdit():
 
-	task_edit_form = taskEditForm()
+	task_edit_form = TaskEditForm()
 	selectTask = Task.query.filter_by(id=request.form.get('clickedTaskRow')).first()
 
-	edit_cat_stmt = Categories.query.all()
+	edit_cat_stmt = Categories.query.filter(Categories.cat_logged==current_user.id).all()
 	choices = [(edit_cat.id, edit_cat.cat_descr) for edit_cat in edit_cat_stmt]
 	task_edit_form.edit_task_category.choices = choices
 
@@ -104,7 +104,7 @@ def taskEdit():
 @tasks.route('/taskUpdate/<taskUpdateID>', methods=['GET', 'POST'])
 @login_required
 def taskUpdate(taskUpdateID):
-	task_edit_form = taskEditForm()
+	task_edit_form = TaskEditForm()
 	taskUpdateSTMT = Task.query.filter_by(id=taskUpdateID).first()
 	taskUpdateSTMT.task_descr = task_edit_form.edit_task_descr.data
 	taskUpdateSTMT.task_start_date = task_edit_form.edit_task_start_date.data

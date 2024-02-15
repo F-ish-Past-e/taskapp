@@ -1,10 +1,12 @@
-$('#add_item_but').click(function(){
+// displaying the item add html
+$(document).on('click', '#add_item_but', function(){
 	hidden_task_id = $('#hiddenTaskID').val()
 	$.post('/item_add', {hidden_task_id:hidden_task_id}, function(itemaddreturn){
-		$('.itemAddContentDiv').html(itemaddreturn)
+		$('.contentDiv').html(itemaddreturn)
+		$('#AddItemModal').modal('show')
 	})
 })
-
+// saving the items
 $(document).off('submit', '#itemAddForm').on('submit', '#itemAddForm', function(event){
 	event.preventDefault()
 	$.post('/item_add', $('#itemAddForm').serialize(), function(){
@@ -12,11 +14,12 @@ $(document).off('submit', '#itemAddForm').on('submit', '#itemAddForm', function(
 		window.location.reload()
 	})
 })
-
+// click event for specific item
 $(document).on('click', '#myTbodyID tr', function(){
 	clickItemRow = $(this).attr('id')
 	$.post('/item_edit', {clickItemRow:clickItemRow}, function(itemEditReturn){
-		$('.itemEditContentDiv').html(itemEditReturn)
+		$('.contentDiv').html(itemEditReturn)
+		$('#EditItemModal').modal('show')
 	})
 })
 

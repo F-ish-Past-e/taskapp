@@ -17,12 +17,12 @@
 				</th>
 			</div>
 			<th style="width: 10%;">
-				<a class="btn btn-sm btn-outline-primary" id="add_item_but" data-bs-target="#AddItemModal" data-bs-toggle="modal" style="width: 100%;">Add Items</a>
+				<a class="btn btn-sm btn-outline-primary" id="add_item_but" style="width: 100%;">Add Items</a>
 			</th>
 		</thead>
 		<tbody id="myTbodyID">
 			{% for item in itemArray %}
-				<tr id="{{ item.itemID }}" data-bs-target="#EditItemModal" data-bs-toggle="modal">
+				<tr id="{{ item.itemID }}">
 					<td>{{ item.itemDescr }}</td>
 					<td>{{ item.itemSartDate }}</td>
 					<td>{{ item.itemEndDate }}</td>
@@ -35,28 +35,6 @@
 	</table>
 </div>
 
-
-<div class="modal fade" id="AddItemModal">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h1 class="modal-title fs-5" id="v_add">Add Item</h1>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="itemAddContentDiv"></div>
-		</div>
-	</div>
-</div>
-<div class="modal fade" id="EditItemModal">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h1 class="modal-title fs-5" id="v_add">Edit Item</h1>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="itemEditContentDiv"></div>
-		</div>
-	</div>
-</div>
+<div class="contentDiv"></div>
 
 <script src="../../static/jsCode/items.js"></script>

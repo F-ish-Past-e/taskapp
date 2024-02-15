@@ -31,7 +31,7 @@
 							</button>
 							<div class="dropdown-content">
 								<a class="categoiresClick">Categories</a>
-								<a class="EditUserClick" data-bs-target="#something" data-bs-toggle="modal">Priorities</a>
+								<a class="prioritiesClick">Priorities</a>
 							</div>
 						</div>	
 					</th>
@@ -60,39 +60,10 @@
 			</table>
 		</div>
 	</div>
-	<div class="modal fade" id="category_modal_list">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="v_add">Task Category List</h1>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="category_contentdiv_list p-2"></div>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="category_modal_add">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="v_add">Task Category Add</h1>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="category_contentdiv_add p-2"></div>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="category_modal_edit">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="v_add">Task Category Edit</h1>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="category_contentdiv_edit p-2"></div>
-			</div>
-		</div>
-	</div>
+
+	<div class="contentDiv"></div>
+
 <script src="../../static/jsCode/tasks.js"></script>
 <script src="../../static/jsCode/task_categories.js"></script>
+<script src="../../static/jsCode/priority.js"></script>
 {% endblock %}
