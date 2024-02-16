@@ -1,0 +1,49 @@
+<div class="modal fade" id="AddPriorityModal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="v_add">Add Priority</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form id="priorityAddForm">
+					{{ pri_add_form.hidden_tag() }}
+					<div class="input-group input-group-sm p-1">
+						<span class="input-group-text">Priority Description</span>
+						{{ pri_add_form.add_pri_descr(class='form-control form-control-sm') }}
+					</div>
+					<div class="input-group input-group-sm p-1">
+						<span class="input-group-text">Priority Color</span>
+						<input type="hidden" name="hiddenSelectedColor" id="hiddenSelectedColor">
+						<button type="button" class="btn btn-sm btn-outline-success clickGreen" value="Green">Green</button>
+						<button type="button" class="btn btn-sm btn-outline-warning clickOrange" value="Orange">Orange</button>
+						<button type="button" class="btn btn-sm btn-outline-danger clickRed" value="Red">Red</button>
+						<span class="input-group-text">Priority Type</span>
+						{{ pri_add_form.add_priority_type(class='form-select form-select-sm') }}
+					</div>
+					<div class="input-group input-group-sm p-1 errorHTML" style="display: none;">
+						<div class="alert alert-danger input-group-text" style="width: 100%;" role="alert">
+							<div class="errorText"></div>
+						</div>
+					</div>
+					<div class="input-group input-group-sm p-1">
+						<div class="container">
+							<div class="row">
+								<div class="col-sm-2"></div>
+								<div class="col-sm-4">
+									<button class="btn btn-sm btn-outline-secondary" type="button" id="priAddBack" style="width: 100%;">Back</button>
+								</div>	
+								<div class="col-sm-4">
+									{{ pri_add_form.add_pri_submit(class="btn btn-sm btn-outline-primary", style="width: 100%;") }}
+								</div>
+								<div class="col-sm-2"></div>
+							</div>	
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="../../static/jsCode/priority.js"></script>

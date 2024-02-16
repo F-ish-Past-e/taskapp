@@ -1,0 +1,43 @@
+<div class="modal fade" id="pri_modal_list">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="v_add">Task Priority List</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="card bg-primary pt-3">
+						<table class="table table-hover table-sm">
+							<thead>
+								<div style="width: 100%;">
+									<th>Priority Description</th>
+									<th>Priority Color</th>
+									<th>Priority Type</th>
+								</div>
+							</thead>
+							<tbody id="PriTbodyID">
+								{% for pri in pri_list_obj %}
+									<tr id="{{ pri.PriID }}">
+										<td>{{ pri.PriDescr }}</td>
+										<td>{{ pri.PriColor }}</td>
+										<td>{{ pri.PriType }}</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+					<div class="row pt-2">
+						<div class="col-sm-4"></div>
+						<div class="col-sm-4">
+							<button class="btn btn-sm btn-outline-primary" id="pri_add_button" style="width: 100%;">Add Priority</button>
+						</div>	
+						<div class="col-sm-4"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="../../static/jsCode/priority.js"></script>
