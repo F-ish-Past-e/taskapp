@@ -1,15 +1,17 @@
 // click event to show dialog priority list
 $('.prioritiesClick').click(function(){
-	$.post('/priority_list', function(task_pri_list_data){
+	hidden_pri_type = $('#hiddenPriType').val()
+	$.post('/priority_list', {hidden_pri_type:hidden_pri_type}, function(task_pri_list_data){
 		$('.contentDiv').html(task_pri_list_data)
 		$('#pri_modal_list').modal('show')
 	})
 })
 
 // displaying the task priority add html
-$(document).on('click', '#pri_add_button', function(){
+$(document).off('click', '#pri_add_button').on('click', '#pri_add_button', function(){
 	$('#pri_modal_list').modal('hide')
-	$.post('priority_add', function(pri_add_return){
+	hidPriType = $('#hidPriType').val()
+	$.post('/priority_add', {hidPriType:hidPriType}, function(pri_add_return){
 		$('.contentDiv').html(pri_add_return)
 		$('#AddPriorityModal').modal('show')
 	})
@@ -23,9 +25,10 @@ $(document).off('submit', '#priorityAddForm').on('submit', '#priorityAddForm', f
 		$('.errorText').html('<span>Please select a priority color!</span>')
 	}else{
 		$('.errorHTML').hide('fast')
-		$.post('priority_add', $('#priorityAddForm').serialize(), function(){
+		$.post('/priority_add', $('#priorityAddForm').serialize(), function(){
 			$('#AddPriorityModal').modal('hide')
-			$.post('/priority_list', function(task_pri_list_data){
+			hidden_pri_type = $('#hiddenPriType').val()
+			$.post('/priority_list', {hidden_pri_type:hidden_pri_type}, function(task_pri_list_data){
 				$('.contentDiv').html(task_pri_list_data)
 				$('#pri_modal_list').modal('show')
 			})
@@ -37,7 +40,7 @@ $(document).off('submit', '#priorityAddForm').on('submit', '#priorityAddForm', f
 $(document).off('click', '#PriTbodyID tr').on('click', '#PriTbodyID tr', function(){
 	clickedPriRow = $(this).attr('id')
 	$('#pri_modal_list').modal('hide')
-	$.post('priority_edit', {clickedPriRow:clickedPriRow}, function(pri_edit_return){
+	$.post('/priority_edit', {clickedPriRow:clickedPriRow}, function(pri_edit_return){
 		$('.contentDiv').html(pri_edit_return)
 		$('#EditPriorityModal').modal('show')
 		if($('#PriSelectedColor').val()=='Green'){
@@ -59,8 +62,9 @@ $(document).off('click', '#PriTbodyID tr').on('click', '#PriTbodyID tr', functio
 $(document).off('submit', '#priorityEditForm').on('submit', '#priorityEditForm', function(event){
 	event.preventDefault()
 	$('#EditPriorityModal').modal('hide')
-	$.post('priority_edit', $('#priorityEditForm').serialize(), function(){
-		$.post('/priority_list', function(task_pri_list_data){
+	$.post('/priority_edit', $('#priorityEditForm').serialize(), function(){
+		hidden_pri_type = $('#hiddenPriType').val()
+		$.post('/priority_list', {hidden_pri_type:hidden_pri_type}, function(task_pri_list_data){
 			$('.contentDiv').html(task_pri_list_data)
 			$('#pri_modal_list').modal('show')
 		})
@@ -70,7 +74,8 @@ $(document).off('submit', '#priorityEditForm').on('submit', '#priorityEditForm',
 // back button when clicked on the priority add
 $(document).off('click', '#priAddBack').on('click', '#priAddBack', function(){
 	$('#AddPriorityModal').modal('hide')
-	$.post('/priority_list', function(task_pri_list_data){
+	hidden_pri_type = $('#hiddenPriType').val()
+	$.post('/priority_list', {hidden_pri_type:hidden_pri_type}, function(task_pri_list_data){
 		$('.contentDiv').html(task_pri_list_data)
 		$('#pri_modal_list').modal('show')
 	})
@@ -79,7 +84,8 @@ $(document).off('click', '#priAddBack').on('click', '#priAddBack', function(){
 // back button when clicked on the priority edit
 $(document).off('click', '#priEditBack').on('click', '#priEditBack', function(){
 	$('#EditPriorityModal').modal('hide')
-	$.post('/priority_list', function(task_pri_list_data){
+	hidden_pri_type = $('#hiddenPriType').val()
+	$.post('/priority_list', {hidden_pri_type:hidden_pri_type}, function(task_pri_list_data){
 		$('.contentDiv').html(task_pri_list_data)
 		$('#pri_modal_list').modal('show')
 	})

@@ -54,18 +54,17 @@
 <script>
 
 $(document).ready(function() {
-    $(".dropdown-button").click(function() {
-        var dropdownContent = $(this).next(".dropdown-content");
-        dropdownContent.toggle('fast');
-    });
+	$(".dropdown-button").click(function() {
+		var dropdownContent = $(this).next(".dropdown-content");
+		dropdownContent.toggle('fast');
+	});
 });
 
-	$(document).on('click', '.EditUserClick', function(){
-		$.post('/userEdit', function(UserEditReturnData){
-			$('.userEditConetentDiv').html(UserEditReturnData)
-		})
+$(document).on('click', '.EditUserClick', function(){
+	$.post('/userEdit', function(UserEditReturnData){
+		$('.userEditConetentDiv').html(UserEditReturnData)
 	})
+})
 
 </script>
-<script src="../static/jsCode/test.js"></script>
 </html>

@@ -1,3 +1,8 @@
+// js for the settings of the items
+$(".dropdown-button").click(function() {
+	var dropdownContent = $(this).next(".dropdown-content");
+	dropdownContent.toggle('fast');
+});
 // displaying the item add html
 $(document).on('click', '#add_item_but', function(){
 	hidden_task_id = $('#hiddenTaskID').val()

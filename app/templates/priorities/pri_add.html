@@ -8,6 +8,7 @@
 			<div class="modal-body">
 				<form id="priorityAddForm">
 					{{ pri_add_form.hidden_tag() }}
+					<input type="hidden" name="hiddenPriType" id="hiddenPriType" value="{{ hidPriType }}">
 					<div class="input-group input-group-sm p-1">
 						<span class="input-group-text">Priority Description</span>
 						{{ pri_add_form.add_pri_descr(class='form-control form-control-sm') }}
@@ -18,8 +19,6 @@
 						<button type="button" class="btn btn-sm btn-outline-success clickGreen" value="Green">Green</button>
 						<button type="button" class="btn btn-sm btn-outline-warning clickOrange" value="Orange">Orange</button>
 						<button type="button" class="btn btn-sm btn-outline-danger clickRed" value="Red">Red</button>
-						<span class="input-group-text">Priority Type</span>
-						{{ pri_add_form.add_priority_type(class='form-select form-select-sm') }}
 					</div>
 					<div class="input-group input-group-sm p-1 errorHTML" style="display: none;">
 						<div class="alert alert-danger input-group-text" style="width: 100%;" role="alert">

@@ -8,12 +8,12 @@
 			<div class="modal-body">
 				<div class="container-fluid">
 					<div class="card bg-primary pt-3">
+						<input type="hidden" name="hidPriType" id="hidPriType" value="{{ hid_Pri_type }}">
 						<table class="table table-hover table-sm">
 							<thead>
 								<div style="width: 100%;">
 									<th>Priority Description</th>
 									<th>Priority Color</th>
-									<th>Priority Type</th>
 								</div>
 							</thead>
 							<tbody id="PriTbodyID">
@@ -21,7 +21,6 @@
 									<tr id="{{ pri.PriID }}">
 										<td>{{ pri.PriDescr }}</td>
 										<td>{{ pri.PriColor }}</td>
-										<td>{{ pri.PriType }}</td>
 									</tr>
 								{% endfor %}
 							</tbody>
