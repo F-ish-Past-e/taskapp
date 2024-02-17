@@ -16,8 +16,8 @@ app.register_blueprint(tasks_bp)
 from app.blueprints.auth import auth as auth_bp
 app.register_blueprint(auth_bp)
 
-from app.blueprints.task_categories import task_categories as task_categories_bp
-app.register_blueprint(task_categories_bp)
+from app.blueprints.categories import categories as categories_bp
+app.register_blueprint(categories_bp)
 
 from app.blueprints.items import items as items_bp
 app.register_blueprint(items_bp)

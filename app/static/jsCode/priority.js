@@ -40,7 +40,7 @@ $(document).off('submit', '#priorityAddForm').on('submit', '#priorityAddForm', f
 $(document).off('click', '#PriTbodyID tr').on('click', '#PriTbodyID tr', function(){
 	clickedPriRow = $(this).attr('id')
 	$('#pri_modal_list').modal('hide')
-	$.post('/priority_edit', {clickedPriRow:clickedPriRow}, function(pri_edit_return){
+	$.post('/priority_edit', {clickedPriRow:clickedPriRow, hidPriType:$('#hidPriType').val()}, function(pri_edit_return){
 		$('.contentDiv').html(pri_edit_return)
 		$('#EditPriorityModal').modal('show')
 		if($('#PriSelectedColor').val()=='Green'){

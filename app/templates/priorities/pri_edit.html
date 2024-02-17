@@ -9,7 +9,7 @@
 				<form id="priorityEditForm">
 					<input type="hidden" name="hiddenPriEditID" id="hiddenPriEditID" value="{{ clickedPriRow }}">
 					<input type="hidden" name="PriSelectedColor" id="PriSelectedColor" value="{{ pri_selected_color }}">
-					<input type="hidden" name="hiddenPriType" id="hiddenPriType" value="tasks">
+					<input type="hidden" name="hiddenPriType" id="hiddenPriType" value="{{ hidPriType }}">
 					{{ pri_edit_form.hidden_tag() }}
 					<div class="input-group input-group-sm p-1">
 						<span class="input-group-text">Priority Description</span>

@@ -2,12 +2,13 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h1 class="modal-title fs-5" id="v_add">Task Category List</h1>
+				<h1 class="modal-title fs-5" id="v_add">Category List</h1>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
 				<div class="container-fluid">
 					<div class="card bg-primary pt-3">
+						<input type="hidden" name="hidCat" id="hidCat" value="{{ hidden_cat }}">
 						<table class="table table-hover table-sm">
 							<thead>
 								<div style="width: 100%;">
@@ -26,7 +27,7 @@
 					<div class="row pt-2">
 						<div class="col-sm-4"></div>
 						<div class="col-sm-4">
-							<button class="btn btn-sm btn-outline-primary" id="task_category_add_button" style="width: 100%;">Add Category</button>
+							<button class="btn btn-sm btn-outline-primary" id="category_add_button" style="width: 100%;">Add Category</button>
 						</div>
 						<div class="col-sm-4"></div>
 					</div>

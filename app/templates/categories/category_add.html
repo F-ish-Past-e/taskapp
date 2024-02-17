@@ -1,25 +1,25 @@
-<div class="modal fade" id="category_modal_edit">
+<div class="modal fade" id="category_modal_add">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h1 class="modal-title fs-5" id="v_add">Task Category Edit</h1>
+				<h1 class="modal-title fs-5" id="v_add">Category Add</h1>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
 				<div class="card">
 					<div class="container p-1">
-						<form id="taskCatEditForm">
-							{{ cat_edit_form.hidden_tag() }}
-							<input type="hidden" name="clickedCatEditRow" id="clickedCatEditRow" value="{{ clickedCatEditRow }}">
+						<form id="catAddForm">
+							{{ cat_add_form.hidden_tag() }}
+							<input type="hidden" name="hidCat" id="hidCat" value="{{ hidCat }}">
 							<div class="input-group input-group-sm p-1">
 								<span class="input-group-text">Category Description</span>
-								{{ cat_edit_form.edit_cat_descr(class="form-control form-control-sm") }}
+								{{ cat_add_form.add_cat_descr(class="form-control form-control-sm") }}
 							</div>
 							<div class="p-1">
 								<div class="container-fluid">
 									<div class="row">
 										<div class="col-sm-6">
-											<a class="btn btn-sm btn-outline-secondary cat_edit_back_but" style="width: 100%;">Back</a>
+											<a class="btn btn-sm btn-outline-secondary cat_add_back_but" style="width: 100%;">Back</a>
 										</div>
 										<div class="col-sm-6">
 											<button type="submit" class="btn btn-sm btn-outline-primary" style="width: 100%;">Save</button>
@@ -29,7 +29,7 @@
 							</div>
 						</form>
 					</div>
-				</div>				
+				</div>
 			</div>
 		</div>
 	</div>

@@ -2,10 +2,11 @@ from app.blueprints.priority import priority
 from app.blueprints.priority.model import Priority
 from app.blueprints.priority.form import PriorityAddForm, PriorityEditForm
 from flask import render_template, redirect, request, url_for, flash
-from flask_login import current_user
+from flask_login import login_required, current_user
 from app import db
 
 @priority.route('/priority_list', methods=['POST', 'GET'])
+@login_required
 def priority_list():
 	hid_Pri_type = request.form.get('hidden_pri_type')
 	pri_list_stmt = Priority.query.filter(Priority.pri_logged==current_user.id, Priority.priority_type==hid_Pri_type).all()
@@ -21,6 +22,7 @@ def priority_list():
 	return render_template('/priorities/pri_list.html', pri_list_obj=pri_list_obj, hid_Pri_type=hid_Pri_type)
 
 @priority.route('/priority_add', methods=['POST', 'GET'])
+@login_required
 def priority_add():
 	pri_add_form = PriorityAddForm()
 	hidPriType = request.form.get('hidPriType')
@@ -37,8 +39,10 @@ def priority_add():
 	return render_template('priorities/pri_add.html', pri_add_form=pri_add_form, hidPriType=hidPriType)
 
 @priority.route('/priority_edit', methods=['POST', 'GET'])
+@login_required
 def priority_edit():
 	pri_edit_form = PriorityEditForm()
+	hidPriType = request.form.get('hidPriType')
 	pri_edit_stmt = Priority.query.get(request.form.get('clickedPriRow'))
 	if pri_edit_form.validate_on_submit():
 		pri_edit_stmt = Priority.query.get(request.form.get('hiddenPriEditID'))
@@ -48,4 +52,4 @@ def priority_edit():
 		return ''
 	pri_edit_form.edit_pri_descr.data = pri_edit_stmt.priority_descr
 	pri_selected_color = pri_edit_stmt.color
-	return render_template('priorities/pri_edit.html', pri_edit_form=pri_edit_form, clickedPriRow=request.form.get('clickedPriRow'), pri_selected_color=pri_selected_color)
+	return render_template('priorities/pri_edit.html', pri_edit_form=pri_edit_form, clickedPriRow=request.form.get('clickedPriRow'), pri_selected_color=pri_selected_color, hidPriType=hidPriType)
