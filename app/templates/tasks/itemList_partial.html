@@ -5,7 +5,9 @@
 				<td>{{ item.itemDescr }}</td>
 				<td>{{ item.itemSartDate }}</td>
 				<td>{{ item.itemEndDate }}</td>
-				<td colspan="2">
+				<td>{{ item.itemCat }}</td>
+				<td>{{ item.itemPri }}</td>
+			<td colspan="3">
 					{% if item.itemComp == True %}
 						<span style="color: rgb(68, 184, 68);">Completed</span>
 					{% endif %}

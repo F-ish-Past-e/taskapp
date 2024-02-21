@@ -53,12 +53,10 @@
 </body>
 <script>
 
-$(document).ready(function() {
-	$(".dropdown-button").click(function() {
-		var dropdownContent = $(this).next(".dropdown-content");
-		dropdownContent.toggle('fast');
-	});
-});
+$(document).off("click", ".dropdown-button").on("click", ".dropdown-button", function(){
+	var dropdownContent = $(this).next(".dropdown-content");
+	dropdownContent.toggle('fast');
+})
 
 $(document).on('click', '.EditUserClick', function(){
 	$.post('/userEdit', function(UserEditReturnData){

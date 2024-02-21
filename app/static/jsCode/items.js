@@ -1,5 +1,5 @@
 // js for the settings of the items
-$(".dropdown-button").click(function() {
+$(".item-dropdown-button").click(function() {
 	var dropdownContent = $(this).next(".dropdown-content");
 	dropdownContent.toggle('fast');
 });

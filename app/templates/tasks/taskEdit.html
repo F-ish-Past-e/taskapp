@@ -28,6 +28,10 @@
 					}}
 				</div>
 				<div class="input-group input-group-sm p-1">
+					<span class="input-group-text">Priority</span>
+					{{ task_edit_form.edit_task_priority(class="form-select form-select-sm") }}
+				</div>
+				<div class="input-group input-group-sm p-1">
 					<span class="input-group-text">Completed</span>
 					<div class="input-group-text">
 						{% if task_edit_form.edit_task_completed == True %}

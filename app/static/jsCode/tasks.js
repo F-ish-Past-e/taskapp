@@ -11,3 +11,8 @@ $(document).on('click', '#taskTbodyID tr', function(){
 	clickedTaskRow = $(this).attr('id')
 	window.location.href = `/divsPage/${clickedTaskRow}`;
 })
+
+$(document).off("click", ".item_dropdown-button").on("click", ".item_dropdown-button", function(){
+	var dropdownContent = $(this).next(".dropdown-content");
+	dropdownContent.toggle('fast');
+})
