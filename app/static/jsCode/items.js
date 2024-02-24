@@ -62,9 +62,9 @@ $(document).off('click', '.itemDelConfirmBut').on('click', '.itemDelConfirmBut',
 
 // back button from category delete
 $(document).off('click', '.itemDelConfirmBack').on('click', '.itemDelConfirmBack', function(){
-	$('#catCheckDeleteModal').modal('hide')
-	$.post('/category_edit', {clickedCatEditRow:$('#clickedCatEditRow').val(), hiddenCat:$('#hiddenCat').val()}, function(new_cat_data_list){
-		$('.contentDiv').html(new_cat_data_list)
-		$('#category_modal_edit').modal('show')	
+	$('#itemCheckDeleteModal').modal('hide')
+	$.post('/item_edit', {clickItemRow:$('#hiddenItemID').val()}, function(new_item_data_list){
+		$('.contentDiv').html(new_item_data_list)
+		$('#EditItemModal').modal('show')	
 	})
 })
