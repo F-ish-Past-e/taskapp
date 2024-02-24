@@ -1,0 +1,33 @@
+<div class="modal fade" id="itemCheckDeleteModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="v_add">Item Delete</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<input type="hidden" name="hiddenItemID" id="hiddenItemID" value="{{ itemID }}">
+				<div class="card">
+					<div class="input-group input-group-sm p-2">
+						<span class="p-3">Are You sure you want to delete item?</span>
+						<div class="input-group input-group-sm p-1 itemErrorHTML" style="display: none;">
+							<div class="alert alert-danger input-group-text" style="width: 100%;" role="alert">
+								<div class="itemErrorText"></div>
+							</div>
+						</div>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-sm-6">
+									<button class="btn btn-sm btn-outline-secondary itemDelConfirmBack" style="width: 100%;">Back</button>
+								</div>
+								<div class="col-sm-6">
+									<button class="btn btn-sm btn-outline-primary itemDelConfirmBut" style="width: 100%;">Confirm</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -55,6 +55,7 @@ $(document).on('submit', '#catEditForm', function(event){
 	})
 })
 
+// back button from the cat add page
 $(document).on('click', '.cat_add_back_but', function(){
 	$('#category_modal_add').modal('hide')
 	hidCat = $('#hidCat').val()
@@ -64,11 +65,47 @@ $(document).on('click', '.cat_add_back_but', function(){
 	})
 })
 
+// back button from the cat edit page
 $(document).on('click', '.cat_edit_back_but', function(){
 	$('#category_modal_edit').modal('hide')
 	hidden_cat = $('#hiddenCat').val()
 	$.post('/category_list', {hidden_cat:hidden_cat}, function(new_cat_data_list){
 		$('.contentDiv').html(new_cat_data_list)
 		$('#category_modal_list').modal('show')	
+	})
+})
+
+// trigger to display confirm html
+$(document).off('click', '.cat_edit_del_but').on('click', '.cat_edit_del_but', function(){
+	$('#category_modal_edit').modal('hide')
+	$.post('/catDeleteConfirm', {catDeleteID:$('#clickedCatEditRow').val(), hiddenCat:$('#hiddenCat').val()}, function(returnDelConfirm){
+		$('.contentDiv').html(returnDelConfirm)
+		$('#catCheckDeleteModal').modal('show')
+	})
+})
+
+// deleting category
+$(document).off('click', '.catDelConfirmBut').on('click', '.catDelConfirmBut', function(){
+	$.post('/catDelete', {catDeleteID:$('#clickedCatEditRow').val(), hiddenCat:$('#hiddenCat').val()}, function(checkTasks){
+		if(checkTasks=='outstanding_records'){
+			$('.catErrorHTML').show('fast')
+			$('.catErrorText').html('<span>Records containing this category name!</span>')
+		}else{
+			$('#catCheckDeleteModal').modal('hide')
+			hidden_cat = $('#hiddenCat').val()
+			$.post('/category_list', {hidden_cat:hidden_cat}, function(new_cat_data_list){
+				$('.contentDiv').html(new_cat_data_list)
+				$('#category_modal_list').modal('show')	
+			})
+		}
+	})
+})
+
+// back button from category delete
+$(document).off('click', '.catDelConfirmBack').on('click', '.catDelConfirmBack', function(){
+	$('#catCheckDeleteModal').modal('hide')
+	$.post('/category_edit', {clickedCatEditRow:$('#clickedCatEditRow').val(), hiddenCat:$('#hiddenCat').val()}, function(new_cat_data_list){
+		$('.contentDiv').html(new_cat_data_list)
+		$('#category_modal_edit').modal('show')	
 	})
 })

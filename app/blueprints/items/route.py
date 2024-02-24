@@ -115,8 +115,13 @@ def item_edit():
 		db.session.commit()
 		return ''
 
-@items.route('/testing')
-def testing():
-	edit_cat_stmt = Categories.query.filter(Categories.cat_logged==current_user.id, Categories.cat_type=='items').all()
-	edit_cat_choices = [(e.id, e.cat_descr) for e in edit_cat_stmt]
-	return edit_cat_choices
+@items.route('/item_delete', methods=['POST', 'GET'])
+def item_delete():
+	item_del_stmt = Items.query.filter(Items.id==request.form.get('itemDeleteID')).delete()
+	db.session.commit()
+	return ''
+
+@items.route('/item_delete_confirm', methods=['POST', 'GET'])
+def item_delete_confirm():
+	return render_template('/tasks/item_delete.html', itemID=request.form.get('itemDeleteID'))
+

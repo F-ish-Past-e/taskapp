@@ -1,8 +1,9 @@
 	<div class="card" style="width: 500px; margin: 0px auto;">
 		<div class="container p-1">
 		<h3>Task Edit</h3>
-			<form action="{{ url_for('tasks.taskUpdate', taskUpdateID=selectTask.id) }}" method="post">
+			<form action="{{ url_for('tasks.taskUpdate', taskUpdateID=clickedTaskID) }}" method="post">
 				{{ task_edit_form.hidden_tag() }}
+				<input type="hidden" name="hiddenTaskID" id="hiddenTaskID" value="{{ clickedTaskID }}">
 				<div class="input-group input-group-sm p-1">
 					<span class="input-group-text">Task Description</span>
 					{{ 
@@ -52,7 +53,7 @@
 								<a href="{{ url_for('tasks.tasksList') }}" class="btn btn-sm btn-outline-secondary" style="width: 100%;">Back</a>
 							</div>
 							<div class="col-sm-4">
-								<a href="{{ url_for('tasks.taskDelete', deletedID=selectTask.id) }}" class="btn btn-sm btn-outline-danger" style="width: 100%;">Delete</a>
+								<button class="btn btn-sm btn-outline-danger" type="button" id="deleteButton" style="width: 100%;">Delete</button>
 							</div>
 							<div class="col-sm-4">
 								<button type="submit" class="btn btn-sm btn-outline-primary" style="width: 100%;">Update</button>
@@ -63,3 +64,4 @@
 			</form>
 		</div>
 	</div>
+<script src="../../static/jsCode/tasks.js"></script>

@@ -53,3 +53,31 @@ def priority_edit():
 	pri_edit_form.edit_pri_descr.data = pri_edit_stmt.priority_descr
 	pri_selected_color = pri_edit_stmt.color
 	return render_template('priorities/pri_edit.html', pri_edit_form=pri_edit_form, clickedPriRow=request.form.get('clickedPriRow'), pri_selected_color=pri_selected_color, hidPriType=hidPriType)
+
+# priority delete
+@priority.route('/priority_delete', methods=['POST'])
+@login_required
+def priority_delete():
+	if request.form.get('hiddenPriType')=='tasks':
+		from app.blueprints.tasks.model import Task
+		task_check_stmt = Task.query.filter(Task.priority_id==request.form.get('priDeleteID')).all()
+		if task_check_stmt:
+			return 'outstanding_records'
+		else:
+			Priority.query.filter(Priority.id==request.form.get('priDeleteID')).delete()
+			db.session.commit()
+			return ''
+	if request.form.get('hiddenPriType')=='items':
+		from app.blueprints.items.model import Items
+		item_check_stmt = Items.query.filter(Items.priority_id==request.form.get('priDeleteID')).all()
+		if item_check_stmt:
+			return 'outstanding_records'
+		else:
+			Priority.query.filter(Priority.id==request.form.get('priDeleteID')).delete()
+			db.session.commit()
+			return ''
+
+@priority.route('/priDeleteConfirm', methods=['POST'])
+@login_required
+def priDeleteConfirm():
+	return render_template('priorities/pri_delete.html', clickedPriRow=request.form.get('priDeleteID'), hiddenPriType=request.form.get('hiddenPriType'), pri_selected_color=request.form.get('PriSelectedColor'))

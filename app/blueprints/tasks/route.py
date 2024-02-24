@@ -1,8 +1,9 @@
-from flask import render_template, request, redirect, jsonify
+from flask import render_template, request, redirect, jsonify, url_for
 from app.blueprints.tasks import tasks
 from app.blueprints.tasks.model import Task
 from app.blueprints.categories.model import Categories
 from app.blueprints.priority.model import Priority
+from app.blueprints.items.model import Items
 from app.blueprints.tasks.form import TaskAddForm, TaskEditForm
 from flask_login import login_required, current_user
 from datetime import datetime
@@ -31,8 +32,8 @@ def tasksList():
 				'taskStartdate': t_list.task_start_date,
 				'taskEnddate': t_list.task_end_date,
 				'taskCategory': t_list.category.cat_descr,
-				'taskPriority': t_list.priority.priority_descr,
-				'taskCompleted': t_list.task_completed,
+					'taskPriority': t_list.priority.priority_descr,
+					'taskCompleted': t_list.task_completed,
 			}
 			task_list_array.append(task_data)
 
@@ -92,7 +93,8 @@ def taskAdd():
 def taskEdit():
 
 	task_edit_form = TaskEditForm()
-	selectTask = Task.query.filter_by(id=request.form.get('clickedTaskRow')).first()
+	clickedTaskID = request.form.get('clickedTaskRow')
+	selectTask = Task.query.filter_by(id=clickedTaskID).first()
 
 	edit_cat_stmt = Categories.query.filter(Categories.cat_logged==current_user.id, Categories.cat_type == 'tasks').all()
 	choices = [(edit_cat.id, edit_cat.cat_descr) for edit_cat in edit_cat_stmt]
@@ -109,7 +111,7 @@ def taskEdit():
 	task_edit_form.edit_task_end_date.data = selectTask.task_end_date
 	task_edit_form.edit_task_completed.data = selectTask.task_completed
 	
-	return render_template('tasks/taskEdit.html', task_edit_form=task_edit_form, selectTask=selectTask)
+	return render_template('tasks/taskEdit.html', task_edit_form=task_edit_form, clickedTaskID=clickedTaskID)
 
 # task update route
 @tasks.route('/taskUpdate/<taskUpdateID>', methods=['GET', 'POST'])
@@ -127,12 +129,22 @@ def taskUpdate(taskUpdateID):
 	return redirect('/tasksList')
 
 # task delete route
-@tasks.route('/taskDelete/<deletedID>', methods=['GET', 'POST'])
+@tasks.route('/taskDelete', methods=['GET', 'POST'])
 @login_required
-def taskDelete(deletedID):
-	Task.query.filter_by(id=deletedID).delete()
-	db.session.commit()
-	return redirect('/tasksList')
+def taskDelete():
+
+	item_stmt = Items.query.filter(Items.task_id==request.form.get('taskDeleteID')).all()
+	if item_stmt:
+		return 'outstanding_records'
+	else:
+		Task.query.filter_by(id=request.form.get('taskDeleteID')).delete()
+		db.session.commit()
+		return ''
+
+@tasks.route('/taskDeleteConfirm', methods=['POST'])
+@login_required
+def deleteConfirm():
+	return render_template('tasks/task_delete.html')
 
 @tasks.route('/divsPage/<clickedTaskRow>')
 def divsPage(clickedTaskRow):

@@ -1,8 +1,8 @@
 // js for the settings of the items
-$(".item-dropdown-button").click(function() {
+$(document).off('click', '.item-dropdown-button').on('click', '.item-dropdown-button', function(){
 	var dropdownContent = $(this).next(".dropdown-content");
 	dropdownContent.toggle('fast');
-});
+})
 // displaying the item add html
 $(document).on('click', '#add_item_but', function(){
 	hidden_task_id = $('#hiddenTaskID').val()
@@ -40,5 +40,31 @@ $('#itemStatus').change(function(){
 	clickedTaskRow = $('#hiddenTaskID').val()
 	$.post('/item_list', {clickedStatus:clickedStatus, clickedTaskRow:clickedTaskRow}, function(itemListData){
 		$('#myTbodyID').html(itemListData)
+	})
+})
+
+// trigger to display confirm html
+$(document).off('click', '.deleteItemBut').on('click', '.deleteItemBut', function(){
+	$('#EditItemModal').modal('hide')
+	$.post('/item_delete_confirm', {itemDeleteID:$('#hidden_item_id').val()}, function(returnDelConfirm){
+		$('.contentDiv').html(returnDelConfirm)
+		$('#itemCheckDeleteModal').modal('show')
+	})
+})
+
+// deleting category
+$(document).off('click', '.itemDelConfirmBut').on('click', '.itemDelConfirmBut', function(){
+	$.post('/item_delete', {itemDeleteID:$('#hiddenItemID').val()}, function(checkTasks){
+		$('#itemCheckDeleteModal').modal('hide')
+		window.location.reload()
+	})
+})
+
+// back button from category delete
+$(document).off('click', '.itemDelConfirmBack').on('click', '.itemDelConfirmBack', function(){
+	$('#catCheckDeleteModal').modal('hide')
+	$.post('/category_edit', {clickedCatEditRow:$('#clickedCatEditRow').val(), hiddenCat:$('#hiddenCat').val()}, function(new_cat_data_list){
+		$('.contentDiv').html(new_cat_data_list)
+		$('#category_modal_edit').modal('show')	
 	})
 })

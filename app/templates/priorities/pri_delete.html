@@ -1,0 +1,35 @@
+<div class="modal fade" id="priCheckDeleteModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="v_add">Priority Delete</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<input type="hidden" name="hiddenPriEditID" id="hiddenPriEditID" value="{{ clickedPriRow }}">
+				<input type="hidden" name="PriSelectedColor" id="PriSelectedColor" value="{{ pri_selected_color }}">
+				<input type="hidden" name="hiddenPriType" id="hiddenPriType" value="{{ hiddenPriType }}">
+				<div class="card">
+					<div class="input-group input-group-sm p-2">
+						<span class="p-3">Are You sure you want to delete priority?</span>
+						<div class="input-group input-group-sm p-1 priErrorHTML" style="display: none;">
+							<div class="alert alert-danger input-group-text" style="width: 100%;" role="alert">
+								<div class="priErrorText"></div>
+							</div>
+						</div>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-sm-6">
+									<button class="btn btn-sm btn-outline-secondary priDelConfirmBack" style="width: 100%;">Back</button>
+								</div>
+								<div class="col-sm-6">
+									<button class="btn btn-sm btn-outline-primary priDelConfirmBut" style="width: 100%;">Confirm</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -34,11 +34,12 @@
 					<div class="input-group input-group-sm p-1">
 						<div class="container">
 							<div class="row">
-								<div class="col-sm-4"></div>
-								<div class="col-sm-4">
-									{{ item_edit_form.edit_item_submit(class="btn btn-sm btn-outline-primary", style="width: 100%;") }}
+								<div class="col-sm-6">
+									<button type="button" class="btn btn-sm btn-outline-danger deleteItemBut" style="width: 100%;">Delete</button>
 								</div>
-								<div class="col-sm-4"></div>
+								<div class="col-sm-6">
+										{{ item_edit_form.edit_item_submit(class="btn btn-sm btn-outline-primary", style="width: 100%;") }}
+								</div>
 							</div>	
 						</div>
 					</div>
@@ -47,5 +48,3 @@
 		</div>
 	</div>
 </div>
-
-<script src="../../static/jsCode/items.js"></script>

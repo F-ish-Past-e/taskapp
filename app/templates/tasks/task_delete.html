@@ -1,0 +1,33 @@
+<div class="modal fade" id="taskCheckDeleteModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="v_add">Task Delete</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="card">
+					<div class="input-group input-group-sm p-2">
+						<span class="p-3">Are You sure you want to delete task?</span>
+						<div class="input-group input-group-sm p-1 taskErrorHTML" style="display: none;">
+							<div class="alert alert-danger input-group-text" style="width: 100%;" role="alert">
+								<div class="taskErrorText"></div>
+							</div>
+						</div>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-sm-6">
+									<button class="btn btn-sm btn-outline-secondary taskDelConfirmBack" style="width: 100%;">Back</button>
+								</div>
+								<div class="col-sm-6">
+									<button class="btn btn-sm btn-outline-primary taskDelConfirmBut" style="width: 100%;">Confirm</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="../../static/jsCode/tasks.js"></script>

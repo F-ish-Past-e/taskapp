@@ -23,6 +23,7 @@ def category_list():
 
 # add for the task categories
 @categories.route('/category_add', methods=['POST', 'GET'])
+@login_required
 def category_add():
 	cat_add_form = CatAddForm()
 	hidCat = request.form.get('hidCat')
@@ -39,6 +40,7 @@ def category_add():
 
 # displaying the edit and updating the task categories
 @categories.route('/category_edit', methods=['POST', 'GET'])
+@login_required
 def category_edit():
 	cat_edit_form = CatEditForm()
 	hiddenCat = request.form.get('hiddenCat')
@@ -50,3 +52,30 @@ def category_edit():
 	cat_edit_stmt = Categories.query.get(request.form.get('clickedCatEditRow'))
 	cat_edit_form.edit_cat_descr.data = cat_edit_stmt.cat_descr
 	return render_template('/categories/category_edit.html', cat_edit_form=cat_edit_form, clickedCatEditRow=request.form.get('clickedCatEditRow'), hiddenCat=hiddenCat)
+
+@categories.route('/catDelete', methods=['POST', 'GET'])
+@login_required
+def catDelete():
+	if request.form.get('hiddenCat')=='tasks':
+		from app.blueprints.tasks.model import Task
+		task_check_stmt = Task.query.filter(Task.category_id==request.form.get('catDeleteID')).all()
+		if task_check_stmt:
+			return 'outstanding_records'
+		else:
+			Categories.query.filter(Categories.id==request.form.get('catDeleteID')).delete()
+			db.session.commit()
+			return ''
+	if request.form.get('hiddenCat')=='items':
+		from app.blueprints.items.model import Items
+		item_check_stmt = Items.query.filter(Items.category_id==request.form.get('catDeleteID')).all()
+		if item_check_stmt:
+			return 'outstanding_records'
+		else:
+			Categories.query.filter(Categories.id==request.form.get('catDeleteID')).delete()
+			db.session.commit()
+			return ''
+
+@categories.route('/catDeleteConfirm', methods=['POST'])
+@login_required
+def deleteConfirm():
+	return render_template('categories/cat_delete.html', clickedCatEditRow=request.form.get('catDeleteID'), hiddenCat=request.form.get('hiddenCat'))

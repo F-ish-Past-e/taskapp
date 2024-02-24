@@ -100,4 +100,50 @@ $(document).ready(function() {
 		$('#hiddenSelectedColor').val($(this).val())
 	});
 });
-  
+
+// trigger to display confirm html
+$(document).off('click', '#priDeleteBut').on('click', '#priDeleteBut', function(){
+	$('#EditPriorityModal').modal('hide')
+	$.post('/priDeleteConfirm', {priDeleteID:$('#hiddenPriEditID').val(), hiddenPriType:$('#hiddenPriType').val(), PriSelectedColor:$('#PriSelectedColor').val()}, function(returnDelConfirm){
+		$('.contentDiv').html(returnDelConfirm)
+		$('#priCheckDeleteModal').modal('show')
+	})
+})
+
+// deleting priority
+$(document).off('click', '.priDelConfirmBut').on('click', '.priDelConfirmBut', function(){
+	$.post('/priority_delete', {priDeleteID:$('#hiddenPriEditID').val(), hiddenPriType:$('#hiddenPriType').val()}, function(returnPriCheck){
+		if(returnPriCheck=='outstanding_records'){
+			$('.priErrorHTML').show('fast')
+			$('.priErrorText').html('<span>Records containing this priority name!</span>')
+		}else{
+			$('#priCheckDeleteModal').modal('hide')
+			hidden_pri_type = $('#hiddenPriType').val()
+			$.post('/priority_list', {hidden_pri_type:hidden_pri_type}, function(task_pri_list_data){
+				$('.contentDiv').html(task_pri_list_data)
+				$('#pri_modal_list').modal('show')
+			})
+		}
+	})
+})
+
+// back button from category delete
+$(document).off('click', '.priDelConfirmBack').on('click', '.priDelConfirmBack', function(){
+	$('#priCheckDeleteModal').modal('hide')
+	$.post('/priority_edit', {clickedPriRow:$('#hiddenPriEditID').val(), hiddenPriType:$('#hiddenPriType').val(), PriSelectedColor:$('#PriSelectedColor').val()}, function(new_pri_data_list){
+		$('.contentDiv').html(new_pri_data_list)
+		$('#EditPriorityModal').modal('show')
+		if($('#PriSelectedColor').val()=='Green'){
+			$(".clickGreen, .clickOrange, .clickRed").removeClass("active");
+			$('.clickGreen').addClass("active")
+		}
+		if($('#PriSelectedColor').val()=='Orange'){
+			$(".clickGreen, .clickOrange, .clickRed").removeClass("active");
+			$('.clickOrange').addClass("active")
+		}
+		if($('#PriSelectedColor').val()=='Red'){
+			$(".clickGreen, .clickOrange, .clickRed").removeClass("active");
+			$('.clickRed').addClass("active")
+		}
+	})
+})

@@ -22,22 +22,23 @@
 						<button type="button" class="btn btn-sm btn-outline-warning clickOrange" value="Orange">Orange</button>
 						<button type="button" class="btn btn-sm btn-outline-danger clickRed" value="Red">Red</button>
 					</div>
-					<div class="input-group input-group-sm p-1 errorHTML" style="display: none;">
+					<div class="input-group input-group-sm p-1 priErrorHTML" style="display: none;">
 						<div class="alert alert-danger input-group-text" style="width: 100%;" role="alert">
-							<div class="errorText"></div>
+							<div class="priErrorText"></div>
 						</div>
 					</div>
 					<div class="input-group input-group-sm p-1">
 						<div class="container">
 							<div class="row">
-								<div class="col-sm-2"></div>
 								<div class="col-sm-4">
 									<button class="btn btn-sm btn-outline-secondary" type="button" id="priEditBack" style="width: 100%;">Back</button>
 								</div>	
 								<div class="col-sm-4">
+									<button class="btn btn-sm btn-outline-danger" type="button" id="priDeleteBut" style="width: 100%;">Delete</button>
+								</div>	
+								<div class="col-sm-4">
 									{{ pri_edit_form.edit_pri_submit(class="btn btn-sm btn-outline-primary", style="width: 100%;") }}
 								</div>
-								<div class="col-sm-2"></div>
 							</div>	
 						</div>
 					</div>
@@ -46,5 +47,3 @@
 		</div>
 	</div>
 </div>
-
-<script src="../../static/jsCode/priority.js"></script>
