@@ -92,14 +92,12 @@ $(document).off('click', '#priEditBack').on('click', '#priEditBack', function(){
 })
 
 // click to highlight the color selected
-$(document).ready(function() {
-	$(".clickGreen, .clickOrange, .clickRed").click(function() {
-		$(".clickGreen, .clickOrange, .clickRed").removeClass("active");
-		$(this).addClass("active");
-		$('#PriSelectedColor').val($(this).val())
-		$('#hiddenSelectedColor').val($(this).val())
-	});
-});
+$(document).off('click', ".clickGreen, .clickOrange, .clickRed").on('click', ".clickGreen, .clickOrange, .clickRed", function(){
+	$(".clickGreen, .clickOrange, .clickRed").removeClass("active");
+	$(this).addClass("active");
+	$('#PriSelectedColor').val($(this).val())
+	$('#hiddenSelectedColor').val($(this).val())
+})
 
 // trigger to display confirm html
 $(document).off('click', '#priDeleteBut').on('click', '#priDeleteBut', function(){
